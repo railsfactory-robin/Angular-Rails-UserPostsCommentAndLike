@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text-center Dashboard">Dashboard</h3>
+    </div>
+    <div class="col-md-11">
+      <label class="pull-right">{{current_user.name}}</label>
+    </div>
+    <div class="col-md-1">
+      <a href="" class="pull-right" ng-click="logout()">logout</a>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <textarea class="form-control" placeholder="Write the interesting thing you did today." ng-model="post"></textarea>
+      </div>
+      <button class="btn btn-primary" ng-click="submitPost(post)">post</button>
+    </div>
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-8">
+      <div ng-repeat="p in posts">
+        <div class="post-wrapper">
+          <span class="name">{{p.user.name}}</span>
+          <span class="pull-right like" ng-class="getClassName(p.likes)" ng-click="like(p.id)"><i class="fa fa-heart" aria-hidden="true"></i></span>
+          <p>{{p.description}}</p>
+          <span class="pull-right">Create at-  <small>{{p.created_at | date}}</small></span>
+          <div class="row footer">
+            <div class="col-md-10">   
+              <div class="form-group">
+                <textarea class="form-control" placeholder="Comment here" ng-model="comment"></textarea>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <button class="btn btn-primary" ng-click="addComment(comment, p.id)">Comment</button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div ng-repeat="com in p.comments">
+              <div class="comments">
+                
+                <p>{{com.description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+.Dashboard{
+  background: #cdcd;
+  padding: 26px;
+}
+.like{
+  font-size: 18px;
+  cursor: pointer;
+}
+.name{
+  color: #365899;
+  font-size: 16px;
+  font-weight: bold;
+}
+.post-wrapper{
+  border: 1px solid #eee;
+  margin: 18px auto;
+  border-radius: 5px;
+  background: white;
+  padding: 16px;
+  box-shadow: 0px 0px 3px 0px black;
+}
+.footer{
+  margin-top: 56px;
+}
+.comments{
+  padding: 6px 15px;
+  background: #5d5959;
+  color: #fff;
+  border: 1px solid;
+  border-radius: 5px;
+}
+.liked{
+  color: red;
+}
+</style>
+
